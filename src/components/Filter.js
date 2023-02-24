@@ -1,4 +1,4 @@
-function Filter( { showingGreasedHogs, updateGreasedFilter }) {
+function Filter( { showingGreasedHogs, updateGreasedFilter, sortBy }) {
     return (
         <div>
             <label>
@@ -8,6 +8,10 @@ function Filter( { showingGreasedHogs, updateGreasedFilter }) {
                 onChange={() => updateGreasedFilter()}
                 />
             </label>
+            <select>
+                <option value="name">Sort by Name</option>
+                <option value="weight">Sort by Weight</option>
+            </select>
         </div>
     );
 }
