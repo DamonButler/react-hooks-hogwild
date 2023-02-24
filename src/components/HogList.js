@@ -2,14 +2,34 @@ import Filter from "./Filter";
 import HogTile from "./HogTiles";
 
 import hogs from "../porkers_data";
+import {useState} from "react";
 
 function HogList() {
-    const hogTiles = hogs.map((hog) => {
-        return <HogTile key={hog.name} hog={hog}/>
+    const [showingGreasedHogs, setShowingGreasedHogs] = useState(true)
+
+
+    const filteredHogs = hogs.filter((hog) => {
+        if(showingGreasedHogs) {
+        return hog.greased
+        } else {
+            return true
+        }
     })
+
+
+
+    const hogTiles = filteredHogs.map((hog) => {
+        return <HogTile key={hog.name} hog={hog}/>
+    });
+
+    function handleGreasedHogsFilter() {
+        setShowingGreasedHogs(!showingGreasedHogs)
+    }
     return (
         <div>
-            <Filter />
+            <Filter showingGreasedHogs={showingGreasedHogs}
+            updateGreasedFilter={handleGreasedHogsFilter}
+            />
             {hogTiles}
         </div>
 );
